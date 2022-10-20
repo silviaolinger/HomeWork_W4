@@ -1,5 +1,5 @@
-const StartBtn = document.querySelector("#start-button");
 
+//creating the question
 const questions = [{
     question1: "Who invented the air conditioner?",
     Answer1:"Jose",
@@ -31,4 +31,6 @@ const questions = [{
 
 ];
 
+//Start button
 
+const StartBtn = document.querySelector("#start-button");
