@@ -15,10 +15,9 @@ header h1 , h2, h3 {
 
 }
 
-main section h2 h3 {
+main p {
   display: flex;
-  text-align: center;
-  align-items: center;
+  justify-content: center;
 }
 
   
@@ -26,13 +25,12 @@ main section h2 h3 {
   height: 200px;
   position: relative;
   border: 3px solid green;
-  align-items: center;
-  align-content: center;
+  justify-content: center;
 
   
 }
 
-.start-button {
+#start-button {
   
   position: relative;
   justify-content: center;
@@ -47,7 +45,7 @@ main section h2 h3 {
   margin-top: 50px;
 
 }
-.start-button:hover {
+#start-button:hover {
   font-size: xx-large;
   width:175px;
   height:105px;

@@ -1,4 +1,31 @@
 
+let timer= 10
+let timerEL= document.getElementById ('countdown');
+const StartBtn= document.getElementById('start-button');
+//start the timer
+StartBtn.addEventListener('click',function(){
+
+ setInterval (function(){
+    timer--;
+  if(timer >=0){
+  timerEL.innerHTML=timer;
+  }
+  if(timer === 0){
+    GameOver();
+  }
+},1000)
+})
+  
+    
+ function GameOver () {
+         clearInterval(timer);
+        
+        alert ('Game Over');}
+    //stoptimer
+    
+    
+
+
 //creating the question
 const questions = [{
     question1: "Who invented the air conditioner?",
@@ -30,7 +57,3 @@ const questions = [{
     CorrectAnswer:"4th July"},
 
 ];
-
-//Start button
-
-const StartBtn = document.querySelector("#start-button");
