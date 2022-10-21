@@ -45,6 +45,13 @@ main p {
   margin-top: 50px;
 
 }
+
+.show {
+  display:block;
+}
+.hide{
+  display: none;
+}
 #start-button:hover {
   font-size: xx-large;
   width:175px;

@@ -2,8 +2,20 @@
 let timer= 10
 let timerEL= document.getElementById ('countdown');
 const StartBtn= document.getElementById('start-button');
-//start the timer
+
+//loading the page with some conditions
+function inicia(){
+    
+    document.getElementById("q-1").hidden=true;
+    document.getElementById("q-2").hidden=true;  
+}
+window.addEventListener("load",inicia)
+//start the timer 
 StartBtn.addEventListener('click',function(){
+    StartBtn.classList.toggle("hide");
+    //const question1=document.getElementById('q-1');
+     
+    
 
  setInterval (function(){
     timer--;
@@ -15,45 +27,59 @@ StartBtn.addEventListener('click',function(){
   }
 },1000)
 })
-  
-    
+     
  function GameOver () {
          clearInterval(timer);
         
         alert ('Game Over');}
-    //stoptimer
-    
-    
+
+        
+//creating the questionbank
+ 
+//fuctino display question
+
+ //function DisplayQ (){
 
 
-//creating the question
-const questions = [{
+    //const q1= document.getElementById("q-1")
+     //let q = q1.value;
+     
+     //if (q === q1)
+ //}
+const questionsbank = [{
     question1: "Who invented the air conditioner?",
-    Answer1:"Jose",
-    Answer2:"Maria",
-    Answer3:"Willis Carrier",
-    Answer4:"Magnolia",
+    Option:["Jose","Maria", "Willis Carrier","Magnolia"],
     CorrectAnswer:"Willis Carrier"},
+
     {
     question2:"Who was the first president of USA?",
-    Answer1:"Jose",
-    Answer2:"Maria",
-    Answer3:"George Washington ",
-    Answer4:"Magnolia",
+    Option:["Jose","Maria","George Washington ", "Magnolia"],
     CorrectAnswer:"George Washington "},
      {
     question3: "What sport gets paid the most in America?",
-    Answer1:"Fottball",
-    Answer2:"Basketball",
-    Answer3:"Boxing",
-    Answer4:"Soccer",
+    Answer:["Fottball","Basketball","Boxing", "Soccer"],
     CorrectAnswer:"Basketball"},
     {
     question4: "When is Independecy Day Celebrated in America?",
-    Answer1:"5th April",
-    Answer2:"24th January",
-    Answer3:"4th June",
-    Answer4:"4th July",
+    Option:["5th April","24th January","4th June", "4th July"],
     CorrectAnswer:"4th July"},
 
 ];
+//getting the quiz  elements
+ const question = document.getElementById('question');
+ const quizcontainer = document.getElementById('container');
+ const score= document.getElementById('score');
+ const option0=document.getElementById('option0');
+ const option1=document.getElementById('option1');
+ const option2=document.getElementById('option2');
+ const option3=document.getElementById('option3');
+ const next= document.querySelector('.nextbutton');
+ const span= document.querySelectorAll('span');
+
+ let i=0;
+ score=0;
+
+ //display questions
+
+ 
+ 

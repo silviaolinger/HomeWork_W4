@@ -14,12 +14,53 @@
           <h2>JavaScript Questions</h2>
    </header>
          <main>
+            <!--countdown timer created-->
                  <p id="countdown"> 10 </p>
+                 <!--Quiz Container Created-->
                 <div class= container>
+                    <!--Start Button-->
                 <button id= 'start-button'> Start </button>
-                 </div>    
-               
-            </div>
+             
+                 <div id="q-1">
+                    <h2 id="question1"> Q1.Who invented the air conditioner? </h2>
+                     <ol type ="A">
+                        <option type="radio" value="Jose"> <span id="Option0">Jose</span><br>
+                        <option type="radio" value="Maria"> <span id="Option1">Maria</span><br>
+                        <option type="radio" value="Wills Carrier"> <span id="Option2" id="Correct-1">Wills Carrier</span><br>
+                        <option type="radio" name="Magnolia"> <span id="Option3">Magnolia</span><br>   
+                        </ol>
+                 </div>  
+                 <div id="q-2">
+                    <h2 id="question2"> Q2.Who was the first president of USA? </h2>
+                     <ol type ="A">
+                        <input type="radio" name="question2"> <span id="Option0">Jose</span><br>
+                        <input type="radio" name="question2"> <span id="Option1">Maria</span><br>
+                        <input type="radio" name="question2"> <span id="Option2" >Magnolia</span><br>
+                        <input type="radio" name="question2"> <span id="Option3"id ="Correct-2">George Washington</span><br>   
+                        </ol>
+                 </div>  
+                    </div>
+                <!--Next Button-->
+                <div class="nextbutton">
+                    <button type="button">Next</button> 
+                  </div>
+                   <div class="checkanswer">
+                    <button type="button">Check Answer</button>
+                   </div>   
+
+               <!--Quiz Score-->
+                    <div id="score">
+                        <h2 id="score-title"> Your Score:</h2>
+                    </div>
+                <!--Answer-->
+                
+                <div id="answerbank">
+                  <h2>Answer:</h2>
+                  <ol type="1">
+
+                  </ol>
+                 </div>
+
             <div class="HighScore-button">
                 <button style="width:170px; height: 50px"> HighScore </button>
             </div>
