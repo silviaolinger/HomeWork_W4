@@ -52,6 +52,9 @@ main p {
 .hide{
   display: none;
 }
+.hide li:hover{
+  display:none}
+
 #start-button:hover {
   font-size: xx-large;
   width:175px;
