@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title> Quiz Game </title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" type="text/css" href="./css/style.css" />
+    </head>
+  <body>
+    <!-- Header -->
+    <header>
+    
+      <h1> QUIZ GAME </h1>
+          <h2>JavaScript Questions</h2>
+           
+   </header>
+         <main>
+            <!--countdown timer created-->
+                 <p id="countdown"> 10 </p><br>
+                 <p id="Score"> </p><br>
+                 <p id="Gameover"> </p><br >
+                 <!--Quiz Container Created-->
+                <div class= container>
+                    <!--Start Button-->
+                  <button id= 'start-button'> Start </button>
+                    <div class="question_bank">
+                   <span id="Question_Number"></span>
+                   <h2 id="Question"></h2>
+                 
+                <div id="alternative_bank">
+                      
+                     <ol type = 'A' id="alternatives">
+                      <li id='a' value="1A" class="answers" onclick='CheckAnswer(this,this)'></li>
+                      <li id='b' value="1B" class="answers" onclick='CheckAnswer(this,this)'></li>
+                      <li id='c' value="1C" class="answers" onclick='CheckAnswer(this,this)'></li>  
+                       </ol>
+                    </div>  
+
+                    <div>
+                      <h2 id="Check_Answer"></h2>
+                    </div>
+                    </div>
+                   <div id="HighScore-button">
+                <button style="width:170px; height: 50px"> HighScore </button>
+            </div>
+          </main>
+      
+          <!-- Footer -->
+          <footer>
+            <h3>
+              Have FUN!!! :)
+            </h3>
+          </footer>
+        
+        
+          <script src= "./js/javascript.js"></script>
+        
+        </body>
+      </html>
+       
+
+    

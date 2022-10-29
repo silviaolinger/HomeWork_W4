@@ -4,13 +4,6 @@ let title = document.querySelector('h1')
 let instructions = document.querySelector('#instructions')
 let displayscore = document.getElementById('Score')
 const StartBtn= document.getElementById('start-button')
-const gameover = document.getElementById('Gameover')
-const form = document.querySelector('form')
-const submit = document.querySelector('submit')
-let username= document.getElementById('username')
-
-
-
 
 
 let points = 0 
@@ -103,29 +96,26 @@ total.textContent = Question_Total
 
 // load the page
 window.addEventListener("load",load);
+//loading the page hidden the questions
 
-function load (){ 
-    container.hidden = true;
-    instructions.hidden = true;
-    form.hidden=true;
-    
 
-}
+StartBtn.classList.add('hide')
+container.classList.add('hide')
+
 
 // start button
 StartBtn.addEventListener('click',function(){
-    StartBtn.hidden=true;
-    container.hidden=false;
-    instructions.hidden = false;
-  //setInterval (function(){
-    //timer--;
-   //if(timer >=0){
-   //timerEL.textContent= "Time: " + timer;
-   //}
-   //if(timer === 0){
-     //GameOver();
-   //}
-  //},1000)
+    //StartBtn.classList.toggle('hide')=true;     
+     
+  setInterval (function(){
+    timer--;
+   if(timer >=0){
+   timerEL.innerHTML=timer;
+   }
+   if(timer === 0){
+     GameOver();
+   }
+  },1000)
   })
 
 //  1a  question, to get  start
@@ -187,7 +177,7 @@ function checkanswer(nQuestion, answer) {
 
     // updating ScoreBoard
     ScoreBoard = points
-    displayscore.textContent = "Score: " + ScoreBoard
+    displayscore.textContent = "points " + ScoreBoard
 
     hideAlternatives()
 
@@ -207,12 +197,12 @@ function checkanswer(nQuestion, answer) {
 
 function GameOver() {
     clearInterval(timer);
-    gameover.textContent = "Game Over!"
-    container.hidden=true;
-    instructions.hidden=true;
+    instructions.textContent = "Game Over!"
+    container.classList.toggle('hide')= true;
 
-    displayscore.textContent   = "Score " + ScoreBoard;
-    displayscore.hidden=false; 
+   
+
+    displayscore.textContent   = "Score " + points 
 
     a.textContent = ""
     b.textContent = ""
@@ -222,23 +212,11 @@ function GameOver() {
     b.setAttribute('value', '0')
     c.setAttribute('value', '0')
 
-    
-       // points = 0 // initilizing ScoreBoard
-        HighScore()
-    
-}
-     function HighScore (){
-      form.hidden = false;
-      displayscore.hidden=false; 
-      //const mostrecentescore =  localStorage.getItem('mostRecentScore')
-      //displayscore.innerText = mostrecentescore;
+    // hiding quetion_banck
+    questionbank.style.display = 'none'
 
-      username.addEventListener("keyup", ()=>{  
-      submit = !username.value });
-         
-        HighScore = e =>{
-           console.log('submit clicked');
-           e.preventDefault();
-             //location.reload()
-    }
-     }
+    setTimeout(function() {
+        points = 0 // initilizing ScoreBoard
+        location.reload();
+    }, 2000)
+}
