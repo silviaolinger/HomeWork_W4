@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Quiz \</title>
+    <title>Quiz </title>
     <!-- CSS -->
     <link rel="stylesheet" type="text/css" href="./css/style.css" />
 </head>
@@ -15,49 +15,55 @@
          <!--countdown timer created-->
                  <p id="countdown"> Time: 0  </p><br>
                  <p id="Score"> </p><br>
-                 <p id="Gameover"> </p><br >
+                 <p id="Gameover"> </p><br>
+   <button id="BacktotheQuiz" style="width:170px; height: 50px"> Back to Quiz </button> 
+                 <h2 id="User_Score">  </h2>
 
-        <section class='content'>
-            
+             
+        
+            <div id="startgame">
             <!--Start Button-->
             <button id= 'start-button'> Start </button>
-
-            <article class='center' id='instructions'>
+            </div>
+            <section>
+            <article id='instructions'>
                 <h1> Math Subject </h1> <br>
                 Read the question and choose the write answer
             </article>
 
-            <article class='container'>
+            <article id='container'>
                 
                 <header class='questionbank'>
-                    <span id='numQuestion'></span>
+                    <h2 id='numQuestion'></h2>
                     <h2 id='question'></h2>
                 </header>
 
                 <div class='body'>
-                    <ol type='A' id='alternatives'>
-                        <li id='a' value='1A' class='answers' onClick='checkanswer(this, this)'></li>
-                        <li id='b' value='1B' class='answers' onClick='checkanswer(this, this)'></li>
-                        <li id='c' value='1C' class='answers' onClick='checkanswer(this, this)'></li>
-                    </ol>
                     
-                        <h2 id="CheckAnswer"> </h2>
-                        <div id="HighScore-button">
-                            <button style="width:170px; height: 50px"> HighScore </button>
+                    <ol type='A' id='alternatives'>
+                        <li id='a' value='1A' class='answers'  onClick='checkanswer(this, this)'></li>
+                        <li id='b' value='1B' class='answers'  onClick='checkanswer(this, this)'></li>
+                        <li id='c' value='1C' class='answers'  onClick='checkanswer(this, this)'></li>
+                    </ol>  
                 </div>
-            </article>
+                </article>
+                <div>
+                    <h3 id="CheckAnswer"> </h3>
+            <div>
+
              <article>
              <form id="userform">
-                <input type="text" id="username" placeholder="username"/>
-                <button type="submit" id="submit" value="Submit" onclick="HighScore(event)">Submit</button>
+                <input type="text" id="username" placeholder="Player Name"/>
+                <button type="submit" id="submit" value="Submit">Submit</button>
               </form>
               </article>
-            <article> <span id='total'></span></article>
+             <article> <span id='total'></span></article>
             
         </section>
-
         
-        <footer>    <h3 class="'center">  Have Fun!!! </h3> </footer>
+        <footer> 
+            <h3>  Have Fun!!! </h3> 
+        </footer>
     </main>
 
 <!-- JS  -->

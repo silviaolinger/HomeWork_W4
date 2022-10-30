@@ -1,4 +1,4 @@
-let timer= 10
+let timer= 20
 let timerEL= document.getElementById ('countdown');
 let title = document.querySelector('h1')
 let instructions = document.querySelector('#instructions')
@@ -6,9 +6,10 @@ let displayscore = document.getElementById('Score')
 const StartBtn= document.getElementById('start-button')
 const gameover = document.getElementById('Gameover')
 const form = document.querySelector('form')
-const submit = document.querySelector('submit')
+const submit = document.getElementById('submit')
 let username= document.getElementById('username')
-
+let showuserandscore= document.getElementById('User_Score');
+const btnback=document.getElementById('BacktotheQuiz');
 
 
 
@@ -28,7 +29,7 @@ let b = document.querySelector('#b')
 let c = document.querySelector('#c')
 
 // class of container
-let container = document.querySelector('.container')
+let container = document.querySelector('#container')
 // ol li com as alternativas
 let alternatives = document.querySelector('#alternatives')
 
@@ -95,11 +96,11 @@ const question_array = [q0, q1, q2, q3, q4, q5]
 let number = document.querySelector('#numQuestion')
 let total  = document.querySelector('#total')
 
-number.textContent = q1.numQuestion
+number.textContent = q1.numQuestion 
 
 let Question_Total = (question_array.length)-1
 console.log("Total of Quetions " + Question_Total)
-total.textContent = Question_Total
+total.textContent = 'Total: '+ Question_Total
 
 // load the page
 window.addEventListener("load",load);
@@ -108,8 +109,10 @@ function load (){
     container.hidden = true;
     instructions.hidden = true;
     form.hidden=true;
-    
-
+    showuserandscore.hidden = true;   
+    btnback.hidden=true;
+    total.hidden=true;
+    Check_Answer.hidden=false;
 }
 
 // start button
@@ -117,33 +120,34 @@ StartBtn.addEventListener('click',function(){
     StartBtn.hidden=true;
     container.hidden=false;
     instructions.hidden = false;
-  //setInterval (function(){
-    //timer--;
-   //if(timer >=0){
-   //timerEL.textContent= "Time: " + timer;
-   //}
-   //if(timer === 0){
-     //GameOver();
-   //}
-  //},1000)
+    total.hidden=false;
+  setInterval (function(){
+    timer--;
+    if(timer >=0){
+   timerEL.textContent= "Time: " + timer;
+   }
+   if(timer === 0){
+    GameOver();
+   }
+  },1000)
   })
 
 //  1a  question, to get  start
-numQuestion.textContent = q1.numQuestion
+numQuestion.textContent =  q1.numQuestion + '.  '
 question.textContent   = q1.question
 a.textContent = q1.alternativeA
 b.textContent = q1.alternativeB
 c.textContent = q1.alternativeC
 
 //giving incial value to 1a question
-a.setAttribute('value', '1A')
-b.setAttribute('value', '1B')
-c.setAttribute('value', '1C')
+a.setAttribute('value', '1')
+b.setAttribute('value', '1')
+c.setAttribute('value', '1')
 
 // building the next question in the question_array
 function nextQuestion(nQuestion) {
     number.textContent = nQuestion
-    numQuestion.textContent = question_array[nQuestion].numQuestion
+    numQuestion.textContent = question_array[nQuestion].numQuestion +'. '
     question.textContent   = question_array[nQuestion].question
     a.textContent = question_array[nQuestion].alternativeA
     b.textContent = question_array[nQuestion].alternativeB
@@ -178,11 +182,13 @@ function checkanswer(nQuestion, answer) {
 
     if(chosenAnswer == correctAnswer) {
         
-        Check_Answer.textContent = "Correta 😊"
+        Check_Answer.textContent = "Correct 😊"
         points += 10 
     } else {
     
-        Check_Answer.textContent = "Errada 😢"
+        Check_Answer.textContent = "Wrong 😢"
+        timer = timer-1;
+        timerEL.textContent= "Time: " + timer;
     }
 
     // updating ScoreBoard
@@ -192,10 +198,10 @@ function checkanswer(nQuestion, answer) {
     hideAlternatives()
 
     setTimeout(function() {
-        Check_Answer.textContent = '...'
         next = quesitonNumber+1
 
         if(next > Question_Total) {
+            localStorage.setItem("mostRecentScore",ScoreBoard)
 
             GameOver()
         } else {
@@ -203,6 +209,7 @@ function checkanswer(nQuestion, answer) {
         }
     }, 250)
     showAlternatives()
+    
 }
 
 function GameOver() {
@@ -210,10 +217,11 @@ function GameOver() {
     gameover.textContent = "Game Over!"
     container.hidden=true;
     instructions.hidden=true;
-
+    showuserandscore.hidden=true;
+    Check_Answer.hidden=true;
+    displayscore.hidden=false;
+    btnback.hidden=true;
     displayscore.textContent   = "Score " + ScoreBoard;
-    displayscore.hidden=false; 
-
     a.textContent = ""
     b.textContent = ""
     c.textContent = ""
@@ -221,24 +229,61 @@ function GameOver() {
     a.setAttribute('value', '0')
     b.setAttribute('value', '0')
     c.setAttribute('value', '0')
-
-    
-       // points = 0 // initilizing ScoreBoard
-        HighScore()
+       
+        SavedScore();
     
 }
-     function HighScore (){
+     function SavedScore (){
+      
       form.hidden = false;
       displayscore.hidden=false; 
-      //const mostrecentescore =  localStorage.getItem('mostRecentScore')
-      //displayscore.innerText = mostrecentescore;
+      submit.disabled=true;
+      btnback.hidden=true;
+      total.hidden=true;
+      displayscore='Score:'+ ScoreBoard;
+
+      
+       const mostRecentScore =  localStorage.getItem('mostRecentScore')
+       displayscore.innerText = mostRecentScore;
+      const savedscore= JSON.parse(localStorage.getItem('savedscore')) || [];
+     
+       //const MAX_HIGH_SCORES = 5;
 
       username.addEventListener("keyup", ()=>{  
-      submit = !username.value });
+      submit.disabled = !username.value; });
          
-        HighScore = e =>{
-           console.log('submit clicked');
-           e.preventDefault();
-             //location.reload()
+        submit.addEventListener('click', function(){
+        
+            const score ={
+                score: mostRecentScore,
+                name: username.value };
+           
+            // saving in the local storge
+            savedscore.push(score);
+            
+            localStorage.setItem('savedscore',JSON.stringify(savedscore));
+            showuserandscore.hidden=false;
+
+            showuserandscore.textContent = 'Player Name: '+ username.value + ' Score: ' + mostRecentScore;
+             
+            
+            })
+          BacktoQuiz();
+        }
+    
+    function BacktoQuiz(){
+        btnback.hidden=false;
+        form.disabled=true;
+        container.hidden=true;
+        displayscore.hidden=true;
+        instructions.hidden=true;
+        btnback.addEventListener('click' , function(){
+        location.reload()
+        
+
+        })
+    
     }
-     }
+
+        
+     
