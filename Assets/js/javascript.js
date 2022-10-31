@@ -9,7 +9,7 @@ const form = document.querySelector('form')
 const submit = document.getElementById('submit')
 let username= document.getElementById('username')
 let showuserandscore= document.getElementById('User_Score');
-const btnback=document.getElementById('BacktotheQuiz');
+const btnhighscore=document.getElementById('HighScore');
 
 
 
@@ -94,7 +94,7 @@ const q5 = {
 const question_array = [q0, q1, q2, q3, q4, q5]
 
 let number = document.querySelector('#numQuestion')
-let total  = document.querySelector('#total')
+let total  = document.getElementById('total')
 
 number.textContent = q1.numQuestion 
 
@@ -110,9 +110,10 @@ function load (){
     instructions.hidden = true;
     form.hidden=true;
     showuserandscore.hidden = true;   
-    btnback.hidden=true;
+    btnhighscore.hidden=false;
     total.hidden=true;
     Check_Answer.hidden=false;
+    
 }
 
 // start button
@@ -121,6 +122,7 @@ StartBtn.addEventListener('click',function(){
     container.hidden=false;
     instructions.hidden = false;
     total.hidden=false;
+    btnhighscore.hidden=true;
   setInterval (function(){
     timer--;
     if(timer >=0){
@@ -220,8 +222,8 @@ function GameOver() {
     showuserandscore.hidden=true;
     Check_Answer.hidden=true;
     displayscore.hidden=false;
-    btnback.hidden=true;
-    displayscore.textContent   = "Score " + ScoreBoard;
+    btnhighscore.hidden=true;
+    displayscore.textContent   = "Score: " + ScoreBoard;
     a.textContent = ""
     b.textContent = ""
     c.textContent = ""
@@ -230,60 +232,56 @@ function GameOver() {
     b.setAttribute('value', '0')
     c.setAttribute('value', '0')
        
-        SavedScore();
+      form.hidden = false; 
+      submit.disabled=true;
+      total.hidden=true;
+      
+      SavedScore()
     
 }
      function SavedScore (){
+        clearInterval(timer);
+        form.hidden = false;
+        Check_Answer.hidden=true;
       
-      form.hidden = false;
-      displayscore.hidden=false; 
-      submit.disabled=true;
-      btnback.hidden=true;
-      total.hidden=true;
-      displayscore='Score:'+ ScoreBoard;
 
-      
-       const mostRecentScore =  localStorage.getItem('mostRecentScore')
-       displayscore.innerText = mostRecentScore;
+      const mostRecentScore =  localStorage.getItem('mostRecentScore')
+       
       const savedscore= JSON.parse(localStorage.getItem('savedscore')) || [];
-     
-       //const MAX_HIGH_SCORES = 5;
-
+      const MAX_HIGH_SCORES = 5;
+      displayscore.innerText = mostRecentScore;
+       
       username.addEventListener("keyup", ()=>{  
       submit.disabled = !username.value; });
          
         submit.addEventListener('click', function(){
-        
+            
             const score ={
                 score: mostRecentScore,
                 name: username.value };
-           
+                setTimeout(function() {
+                if (username.value != ''){
+                    showuserandscore.textContent = 'Player: ' + username.value + 'Score: ' + ScoreBoard; 
+                   }
+                }, 250)
             // saving in the local storge
             savedscore.push(score);
-            
-            localStorage.setItem('savedscore',JSON.stringify(savedscore));
-            showuserandscore.hidden=false;
-
-            showuserandscore.textContent = 'Player Name: '+ username.value + ' Score: ' + mostRecentScore;
-             
-            
+            // returning a own sortation from higher c to lowest score
+            savedscore.sort( (a, b) => {
+                return b.score - a.score;
             })
-          BacktoQuiz();
-        }
+            // display the quantity of items in the array
+            savedscore.splice(MAX_HIGH_SCORES);
+            localStorage.setItem('savedscore',JSON.stringify(savedscore));
+                        
+            
+           
+            load();
+        });
+     }
     
-    function BacktoQuiz(){
-        btnback.hidden=false;
-        form.disabled=true;
-        container.hidden=true;
-        displayscore.hidden=true;
-        instructions.hidden=true;
-        btnback.addEventListener('click' , function(){
-        location.reload()
-        
-
-        })
     
-    }
+    
 
         
      
