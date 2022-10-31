@@ -17,4 +17,18 @@ THEN I can save my initials and my score
 **Link to Deployed Application**
 
 **ScreenShoots of the Deployed Application**
+*Home*
+![](/Assets/images/HomePage.png)
+*Game*
+![](/Assets/images/GamePage.png)
+*High-Score*
+![](/Assets/images/HighScorePage.png)
+
+**Colaboration**
+*Tutoring Sessions*
+**Reference Links**
+https://w3schools.com/css/
+
+https://developer.mozilla.org
+
 
