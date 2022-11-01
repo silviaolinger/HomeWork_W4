@@ -17,7 +17,7 @@ An interactive, timed Math quiz that stores a high score leaderboard in local st
 - THEN I can save my initials and my score
 
 ## Link to Deployed Application
-
+![]https://github.com/silviaolinger/QuizGame
 ## ScreenShoots of the Deployed Application**
 
 ***Home***
