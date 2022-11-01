@@ -10,7 +10,8 @@ const submit = document.getElementById('submit')
 let username= document.getElementById('username')
 let showuserandscore= document.getElementById('User_Score');
 const btnhighscore=document.getElementById('HighScore');
-
+const btngohome=document.getElementById('GoHome')
+let timecheck;
 
 
 
@@ -47,47 +48,47 @@ const q0 = {
 
 const q1 = {
     numQuestion   : 1,
-    question     : "How much is 1+1",
-    alternativeA : "2",
-    alternativeB : "4",
-    alternativeC : "10",
-    correct     : "2",
+    question     : "Inside which HTML element do we put the JavaScript?",
+    alternativeA : "<script>",
+    alternativeB : "<h1>",
+    alternativeC : "<span>",
+    correct     : "<script>",
 }
 
 const q2 = {
     numQuestion   : 2,
-    question     : "How much is 10+30",
-    alternativeA : "10",
-    alternativeB : "55",
-    alternativeC : "40",
-    correct    : "40",
+    question     : "What is the correct to call external script named xxx.js?",
+    alternativeA : "<script xxx.js>",
+    alternativeB : "<script href=.js>",
+    alternativeC : "<script src=xxx.js>",
+    correct    : "<script src=xxx.js>",
 }
 
 const q3 = {
     numQuestion   : 3,
-    question     : "How much is 3+15",
-    AlternativeA : "10",
-    alternativeB : "37",
-    alternativeC : "18",
-    correct     : "18",
+    question     : "Which one is incorret?",
+    alternativeA : "alert[Hello World]",
+    alternativeB : "[Hello World]alert",
+    alternativeC : "Both A and B",
+    correct     : "Both A and B",
 }
 
 const q4 = {
     numQuestion   : 4,
-    question     : "How much is 4+12",
-    alternativeA: "10",
-    alternativeB : "16",
-    alternativeC : "20",
-    correct      : "16",
+    question     : "How do you create a function in JavaScript?",
+    alternativeA: "function:myFunction()",
+    alternativeB : "function myFunction()",
+    alternativeC : "myFunction function()",
+    correct      : "function myFunction()",
 }
 
 const q5 = {
     numQuestion   : 5,
-    question     : "How much is -1-1?",
-    alternativeA : "1",
-    alternativeB : "2",
-    alternativeC : "0",
-    correct      : "0",
+    question     : "How do you call a function named myFunction?",
+    alternativeA : "come here myFunction",
+    alternativeB : "Hello myFunction",
+    alternativeC : "myFunction ()",
+    correct      : "myFunction ()",
 }
 
 // const with question_array
@@ -113,7 +114,7 @@ function load (){
     btnhighscore.hidden=false;
     total.hidden=true;
     Check_Answer.hidden=false;
-    
+   btngohome.hidden=true;
 }
 
 // start button
@@ -123,12 +124,13 @@ StartBtn.addEventListener('click',function(){
     instructions.hidden = false;
     total.hidden=false;
     btnhighscore.hidden=true;
-  setInterval (function(){
+   timecheck = setInterval (function(){
     timer--;
     if(timer >=0){
    timerEL.textContent= "Time: " + timer;
    }
    if(timer === 0){
+    
     GameOver();
    }
   },1000)
@@ -157,6 +159,8 @@ function nextQuestion(nQuestion) {
     a.setAttribute('value', nQuestion+'A')
     b.setAttribute('value', nQuestion+'B')
     c.setAttribute('value', nQuestion+'C')
+    
+   
 }
 //hide alternatives
 function hideAlternatives() {
@@ -204,8 +208,10 @@ function checkanswer(nQuestion, answer) {
 
         if(next > Question_Total) {
             localStorage.setItem("mostRecentScore",ScoreBoard)
-
-            GameOver()
+            clearInterval(timecheck);
+             timerEL.innerHTML='Time: 0';
+            GameOver();
+            
         } else {
             nextQuestion(next)
         }
@@ -215,12 +221,14 @@ function checkanswer(nQuestion, answer) {
 }
 
 function GameOver() {
-    clearInterval(timer);
+    clearInterval(timecheck);
     gameover.textContent = "Game Over!"
     container.hidden=true;
     instructions.hidden=true;
     showuserandscore.hidden=true;
-    Check_Answer.hidden=true;
+
+    //Check_Answer.hidden=true;
+    Check_Answer.innerHTML = "";
     displayscore.hidden=false;
     btnhighscore.hidden=true;
     displayscore.textContent   = "Score: " + ScoreBoard;
@@ -232,8 +240,8 @@ function GameOver() {
     b.setAttribute('value', '0')
     c.setAttribute('value', '0')
        
-      form.hidden = false; 
-      submit.disabled=true;
+     
+      
       total.hidden=true;
       
       SavedScore()
@@ -243,7 +251,6 @@ function GameOver() {
         clearInterval(timer);
         form.hidden = false;
         Check_Answer.hidden=true;
-      
 
       const mostRecentScore =  localStorage.getItem('mostRecentScore')
        
@@ -251,34 +258,41 @@ function GameOver() {
       const MAX_HIGH_SCORES = 5;
       displayscore.innerText = mostRecentScore;
        
-      username.addEventListener("keyup", ()=>{  
-      submit.disabled = !username.value; });
-         
-        submit.addEventListener('click', function(){
-            
+      //username.addEventListener("keyup", (e)=>{  
+      //submit.disabled = !username.value; 
+          //e.preventDefault ()
+    // });
+        submit.addEventListener('click', function(e){
+            e.preventDefault()
             const score ={
                 score: mostRecentScore,
                 name: username.value };
-                setTimeout(function() {
-                if (username.value != ''){
-                    showuserandscore.textContent = 'Player: ' + username.value + 'Score: ' + ScoreBoard; 
-                   }
-                }, 250)
+               
             // saving in the local storge
+             
+            showuserandscore.hidden=false
+            showuserandscore.innerHTML = 'Player: ' + score.name + ' Score: ' + score.score; 
+            form.hidden=true;
+            btngohome.hidden=false;
+            btnhighscore.hidden=false;
             savedscore.push(score);
             // returning a own sortation from higher c to lowest score
             savedscore.sort( (a, b) => {
                 return b.score - a.score;
             })
+             
+             
             // display the quantity of items in the array
             savedscore.splice(MAX_HIGH_SCORES);
             localStorage.setItem('savedscore',JSON.stringify(savedscore));
-                        
             
-           
-            load();
+    
         });
+        
+        
+        
      }
+
     
     
     

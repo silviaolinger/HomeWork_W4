@@ -46,15 +46,27 @@ main p {
     background-color: #cacdd0;
     border-radius: 5px;
     margin-bottom: 2rem;
+    
 }
   
+ .typeColor2 {
+  border:1px solid white;
+  border-radius: 50px;
+  background-color: bisque;
+} 
 
+#container ol li #a {
+  background-color: #e6e6e6;
+  max-width: 10px;
+  max-height: 20px;
+}
 
 
 #container ol li{
   color: var(--blue);
-  max-width: 70px;
-  max-height: 50px;
+  max-width: 180px;
+  max-height: 200px;
+  margin-bottom: 1rem;
     
 }
    #container ol li:hover {
@@ -75,6 +87,17 @@ main p {
   justify-content: center;
   align-items: center;
 }
+
+#GoHome{
+  text-align: center;
+  font-style: normal;
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+  font-weight: 200;
+  color: white;
+  background-color:var(--lightblue);
+  border-color: var(--lightblue);
+ 
+}
 #HighScore{
   text-align: center;
   height: 50px;
@@ -86,6 +109,7 @@ main p {
   width:170px; 
   margin-top: 50px;
   border-color: var(--lightblue);
+  margin-bottom: 1rem;
  
 }
 #start-button {
@@ -99,6 +123,10 @@ main p {
   width:170px;
   margin-top: 50px;
   border-color: var(--lightblue);
+}
+#User_Score{
+  color:var(--blue);
+  font-size: ;
 }
 
 .show {
@@ -122,6 +150,13 @@ main p {
   height:55px;
   cursor:pointer;
 }
+
+#GoHome:hover{
+  font-size: large;
+  width:175px;
+  height:55px;
+  cursor:pointer;
+}
 .timer{
   position: relative;;
   text-align: center;
@@ -131,12 +166,12 @@ main p {
   text-align: left;
   
 }
-input[type=text]:focus {
+/* input[type=text]:focus {
   background-color: var(--lightblue);
   border: 3px solid rgb(30, 7, 237);
   color:var(--blue);
   padding: 10px 50px;
-  margin: 4px 10px
+  margin: 4px 10px */
 }
 
 button[type=submit]{

@@ -16,7 +16,7 @@
                  <p id="countdown"> Time: 0  </p><br>
                  <p id="Score"> </p><br>
                  <p id="Gameover"> </p><br> 
-                 <h2 id="User_Score">  </h2>
+                 <h3 id="User_Score">  </h3>
    
         
             <div id="buttons">
@@ -24,6 +24,8 @@
             <button id= 'start-button'> Start </button>
             <a href="./highscore.html">
             <button id="HighScore"> High Score </button>
+            <a href ='./home.html'> 
+                <button id="GoHome" style="width:170px; height: 50px"> Go home </button>
             </a>
             </div>
     
@@ -33,19 +35,20 @@
                 Read the question and choose the write answer
             </article>
 
+        
             <article id='container'>
                 
                 <header class='questionbank'>
-                    <h2 id='numQuestion'></h2>
-                    <h2 id='question'></h2>
+                    <h3 id='numQuestion'></h3>
+                    <h3 id='question'></h3>
                 </header>
 
                 <div class='body'>
                     
                     <ol type='A' id='alternatives'>
-                        <li id='a' value='1A' class='answers'  onClick='checkanswer(this, this)'></li>
-                        <li id='b' value='1B' class='answers'  onClick='checkanswer(this, this)'></li>
-                        <li id='c' value='1C' class='answers'  onClick='checkanswer(this, this)'></li>
+                        <li id='a' value='1A'  class='answers'  onClick='checkanswer(this, this)'></li>
+                        <li id='b' value='1B' class='answers bel'  onClick='checkanswer(this, this)'></li>
+                        <li id='c' value='1C' class='answers cel'  onClick='checkanswer(this, this)'></li>
                     </ol>  
                 </div>
                 </article>
